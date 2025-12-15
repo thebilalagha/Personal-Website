@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" type="x-icon" href=https://i.postimg.cc/Qxxhfw5N/Website-Logo.png>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BILAL AGHA</title>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@200;400;900&display=swap" rel="stylesheet">
@@ -968,6 +967,12 @@
             cursor: pointer;
         }
 
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+    }
+}
+
         .menu-icon span {
             display: block;
             height: 2px;
@@ -1816,15 +1821,15 @@
                     mobileMenuOpen = false;
                 });
 
-                menuLink.addEventListener('mouseenter', () => {
-                    menuLink.style.transform = 'translateY(30px) scale(1.1)';
-                    menuLink.style.color = '#ccc';
-                });
+menuLink.addEventListener('mouseenter', () => {
+    menuLink.style.transform = 'translateY(30px) scale(1.1)';
+    menuLink.style.color = '#ccc';
+});
 
-                menuLink.addEventListener('mouseleave', () => {
-                    menuLink.style.transform = 'translateY(30px) scale(1)';
-                    menuLink.style.color = '#fff';
-                });
+menuLink.addEventListener('mouseleave', () => {
+    menuLink.style.transform = 'translateY(30px) scale(1)';
+    menuLink.style.color = '#fff';
+});
 
                 mobileMenu.appendChild(menuLink);
 
