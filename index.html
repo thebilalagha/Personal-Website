@@ -209,11 +209,13 @@
         }
       
 .hero-subtitle {
-    position: relative;
-    margin-top: 500px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, 0);
     text-align: center;
     font-family: 'Space Mono', monospace;
-    font-size: clamp(37px, 2.5vw, 22px);
+    font-size: clamp(12px, 2.5vw, 22px);
     color: #121212;
     letter-spacing: 10px;
     text-transform: uppercase;
@@ -221,25 +223,26 @@
     z-index: 10;
     opacity: 0;
     white-space: nowrap;
+    width: 100%;
     animation: subtitleReveal 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.4s forwards;
 }
 
 @keyframes subtitleReveal {
     0% {
         opacity: 0;
-        transform: translateY(50px) scale(0.9);
+        transform: translate(-50%, 50px) scale(0.9);
         letter-spacing: 25px;
         filter: blur(10px);
     }
     50% {
         opacity: 0.5;
-        transform: translateY(15px) scale(0.95);
+        transform: translate(-50%, 15px) scale(0.95);
         letter-spacing: 15px;
         filter: blur(5px);
     }
     100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translate(-50%, 0) scale(1);
         letter-spacing: 10px;
         filter: blur(0px);
     }
@@ -971,10 +974,26 @@
             margin-bottom: 6px;
             border-radius: 2px;
             transition: all 0.3s ease;
+            position: absolute;
+            width: 100%;
+            left: 0;
+        }
+
+        .menu-icon span:nth-child(1) {
+            top: 0;
+        }
+
+        .menu-icon span:nth-child(2) {
+            top: 9px;
+        }
+
+        .menu-icon span:nth-child(3) {
+            top: 18px;
         }
 
         .menu-icon.active span:nth-child(1) {
-            transform: rotate(45deg) translateY(8px);
+            transform: rotate(45deg);
+            top: 9px;
         }
 
         .menu-icon.active span:nth-child(2) {
@@ -982,7 +1001,12 @@
         }
 
         .menu-icon.active span:nth-child(3) {
-            transform: rotate(-45deg) translateY(-8px);
+            transform: rotate(-45deg);
+            top: 9px;
+        }
+
+        .menu-icon.active span {
+            background: #fff;
         }
 
         /* Loading Screen */
@@ -1087,6 +1111,15 @@
                 text-align: center;
             }
 
+            .hero-subtitle {
+                font-size: clamp(10px, 3vw, 16px);
+                letter-spacing: 4px;
+                white-space: normal;
+                padding: 0 20px;
+                top: 65%;
+                width: calc(100% - 40px);
+            }
+
             #projects {
                 padding: 120px 20px;
             }
@@ -1157,6 +1190,13 @@
             .hero-name-bg {
                 font-size: clamp(35px, 12vw, 60px);
                 line-height: 1;
+            }
+
+            .hero-subtitle {
+                font-size: clamp(9px, 2.5vw, 14px);
+                letter-spacing: 3px;
+                top: 70%;
+                width: calc(100% - 40px);
             }
 
             .navbar {
@@ -1334,7 +1374,7 @@
             <span class="hero-name-line2">AGHA</span>
         </div>
         <!-- Subtitle -->
-        <div class="hero-subtitle">STUDENT | AUTHOR | ARTIST</div>
+        <div class="hero-subtitle"></div>
     </div>
 </div>
     </section>
@@ -1736,9 +1776,18 @@
             `;
 
             const menuItems = ['Home', 'Artwork', 'Writing', 'About', 'Contact'];
+            const sectionIdMap = {
+                'Home': 'home',
+                'Artwork': 'projects',
+                'Writing': 'writing',
+                'About': 'about',
+                'Contact': 'contact'
+            };
+            
             menuItems.forEach((item, index) => {
                 const menuLink = document.createElement('a');
-                menuLink.href = `#${item.toLowerCase()}`;
+                const targetId = sectionIdMap[item];
+                menuLink.href = `#${targetId}`;
                 menuLink.textContent = item.toUpperCase();
                 menuLink.style.cssText = `
                     font-family: 'Bebas Neue', sans-serif;
@@ -1753,7 +1802,6 @@
                
                 menuLink.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const targetId = item.toLowerCase();
                     const targetSection = document.getElementById(targetId);
                     if (targetSection) {
                         const offsetTop = targetSection.offsetTop - 100;
